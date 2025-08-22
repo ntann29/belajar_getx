@@ -41,7 +41,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.POST,
-      page: () => const PostView(),
+      page: () => PostView(),
       binding: PostBinding(),
     ),
   ];

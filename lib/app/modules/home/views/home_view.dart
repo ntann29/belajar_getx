@@ -1,3 +1,5 @@
+import 'package:belajar_getx/app/modules/post/views/album_view.dart';
+import 'package:belajar_getx/app/modules/post/views/post_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../controllers/home_controller.dart';
@@ -69,6 +71,8 @@ class _HomeViewState extends State<HomeView> {
     {'title': 'Counter', 'page': CounterView()},
     {'title': 'Formulir', 'page': FormulirView()}, // controller sudah di-init
     {'title': 'Barang', 'page': BarangView()},
+    {'title': 'Post', 'page': PostView()},
+    {'title': 'Album', 'page': AlbumView()},
   ];
 
   @override
@@ -103,6 +107,14 @@ class _HomeViewState extends State<HomeView> {
           BottomNavigationBarItem(
             icon: Icon(Icons.inventory_2_outlined),
             label: "Barang",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.post_add),
+            label: "Post",
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.photo_album),
+            label: "Album",
           ),
         ],
       ),

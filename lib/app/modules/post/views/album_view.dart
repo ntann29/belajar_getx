@@ -1,10 +1,10 @@
-import 'package:belajar_getx/app/modules/post/views/post_detail_view.dart';
+import 'package:belajar_getx/app/modules/post/views/album_detail_view.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../controllers/post_controller.dart';
+import '../controllers/album_controller.dart';
 
-class PostView extends StatelessWidget {
-  final PostController controller = Get.put(PostController());
+class AlbumView extends StatelessWidget {
+  final AlbumController controller = Get.put(AlbumController());
 
   @override
   Widget build(BuildContext context) {
@@ -14,7 +14,7 @@ class PostView extends StatelessWidget {
         centerTitle: true,
         elevation: 2,
         title: const Text(
-          "Post",
+          "Album",
           style: TextStyle(
             fontWeight: FontWeight.bold,
             fontSize: 20,
@@ -28,10 +28,10 @@ class PostView extends StatelessWidget {
           );
         }
 
-        if (controller.posts.isEmpty) {
+        if (controller.albums.isEmpty) {
           return const Center(
             child: Text(
-              "No posts available",
+              "No albums available",
               style: TextStyle(fontSize: 16, color: Colors.grey),
             ),
           );
@@ -39,9 +39,9 @@ class PostView extends StatelessWidget {
 
         return ListView.builder(
           padding: const EdgeInsets.all(12),
-          itemCount: controller.posts.length,
+          itemCount: controller.albums.length,
           itemBuilder: (context, index) {
-            final post = controller.posts[index];
+            final album = controller.albums[index];
             return Card(
               elevation: 3,
               shape: RoundedRectangleBorder(
@@ -50,8 +50,18 @@ class PostView extends StatelessWidget {
               margin: const EdgeInsets.symmetric(vertical: 8),
               child: ListTile(
                 contentPadding: const EdgeInsets.all(16),
+                leading: CircleAvatar(
+                  backgroundColor: Colors.purple[200],
+                  child: Text(
+                    album.id.toString(),
+                    style: const TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ),
                 title: Text(
-                  post.title,
+                  album.title,
                   style: const TextStyle(
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
@@ -60,9 +70,7 @@ class PostView extends StatelessWidget {
                 subtitle: Padding(
                   padding: const EdgeInsets.only(top: 6),
                   child: Text(
-                    post.body,
-                    maxLines: 2,
-                    overflow: TextOverflow.ellipsis,
+                    "User ID: ${album.userId}",
                     style: TextStyle(
                       color: Colors.grey[700],
                       fontSize: 14,
@@ -71,7 +79,7 @@ class PostView extends StatelessWidget {
                 ),
                 trailing: TextButton(
                   onPressed: () {
-                    Get.to(() => PostDetailView(post: post));
+                    Get.to(() => AlbumDetailView(album: album));
                   },
                   style: TextButton.styleFrom(
                     foregroundColor: Colors.purple,
@@ -82,7 +90,7 @@ class PostView extends StatelessWidget {
                   ),
                 ),
                 onTap: () {
-                  Get.to(() => PostDetailView(post: post));
+                  Get.to(() => AlbumDetailView(album: album));
                 },
               ),
             );

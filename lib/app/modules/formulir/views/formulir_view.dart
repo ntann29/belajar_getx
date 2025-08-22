@@ -11,13 +11,13 @@ class FormulirView extends GetView<FormulirController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Formulir View'),
-        centerTitle: true,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () {
-            Get.offAll(() => const HomeView());
-          },
+        backgroundColor: Colors.purple[200], // warna ungu muda biar sama
+        centerTitle: true, // biar judul di tengah
+        title: const Text(
+          "Form Formulir",
+          style: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
         ),
       ),
       body: Padding(
@@ -145,7 +145,23 @@ class FormulirView extends GetView<FormulirController> {
             // 🔥 Tombol Submit lebih kecil
             Center(
               child: InkWell(
-                onTap: () => Get.to(() => FormulirOutputView()),
+                onTap: () {
+                  if (controller.nameController.text.isEmpty ||
+                      controller.selectedCourses.value.isEmpty ||
+                      controller.gender.value.isEmpty ||
+                      controller.formattedDate.isEmpty) {
+                    Get.snackbar(
+                      "Form Belum Lengkap",
+                      "Harap isi semua data terlebih dahulu",
+                      backgroundColor: Colors.purple[100],
+                      colorText: Colors.black,
+                      snackPosition: SnackPosition.BOTTOM,
+                      margin: const EdgeInsets.all(16),
+                    );
+                  } else {
+                    Get.to(() => FormulirOutputView());
+                  }
+                },
                 borderRadius: BorderRadius.circular(12),
                 child: Container(
                   padding:
